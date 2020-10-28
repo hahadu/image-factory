@@ -9,41 +9,31 @@
  *  +----------------------------------------------------------------------
  *  | Author: hahadu <582167246@qq.com>
  *  +----------------------------------------------------------------------
- *  | Date: 2020/10/28 上午12:05
+ *  | Date: 2020/10/28 下午7:58
  *  +----------------------------------------------------------------------
- *  | Description:   ImageFactory
+ *  | Description:   微信公众平台SDK
  *  +----------------------------------------------------------------------
  **/
 
-namespace Hahadu\ImageFactory\Kernel;
-use Hahadu\ImageFactory\Confing\Config;
-use Hahadu\ImageFactory\Kernel\Helper\BaseHelper;
-use Imagick;
-use ImagickDraw;
-use ImagickPixel;
+namespace Hahadu\ImageFactory\Manage\TextToImage;
+use Hahadu\ImageFactory\Manage\TextToImage\Model\TextToAvatar;
+use Hahadu\ImageFactory\Manage\TextToImage\Model\TextToIcon;
 
-class Kernel
+
+class Client
 {
+    protected $TextToAvatar;
+    protected $TextToIcon;
 
- //   public $chars;
-    /****
-     * @var Config
-     */
-    public $config;
-    public $base;
-    public function __construct($config){
-        $this->config = $config;
-        $this->base = new BaseHelper($config);
-    //    $this->chars = $config->chars;
+    public function __construct($kernel){
+        $this->TextToAvatar = new TextToAvatar($kernel);
+        $this->TextToIcon = new TextToIcon($kernel);
     }
-    public function Imagick($files = null){
-        return new Imagick($files);
+    public function text_to_avatar($text){
+        return $this->TextToAvatar->text_to_avatar($text);
     }
-    public function ImagickDraw(){
-        return new ImagickDraw();
-    }
-    public function ImagickPixel($color = null){
-        return new ImagickPixel($color);
+    public function text_to_icon($text,$path=''){
+        return $this->TextToIcon->text_to_icon($text,$path);
     }
 
 }

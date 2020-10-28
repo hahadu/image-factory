@@ -17,8 +17,6 @@
 
 namespace Hahadu\ImageFactory\Manage\Scale\Model;
 
-
-use Hahadu\Helper\FilesHelper;
 use Hahadu\ImageFactory\Confing\Constants;
 use Hahadu\ImageFactory\Kernel\Kernel;
 
@@ -35,7 +33,6 @@ class Thumb
         $this->_kernel = $kernel;
         $this->path =$this->_kernel->config->setSavePath;
         $this->imagick = $this->_kernel->Imagick($this->file_name);
-        $this->_kernel->base->mkdir($this->path);
     }
     /****
      * 创建缩略图
@@ -51,9 +48,7 @@ class Thumb
 
         $width  = $width ?? 100;
         $height = $height ?? 100;
-        if(null!=$path){
-            $this->path = $path;
-        }
+        $this->path = $this->_kernel->base->get_save_path($path);
 
         $image  = $this->imagick;
         $format = mb_strtolower($image->getImageFormat());

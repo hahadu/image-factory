@@ -11,7 +11,7 @@
  *  +----------------------------------------------------------------------
  *  | Date: 2020/10/28 下午5:00
  *  +----------------------------------------------------------------------
- *  | Description:   微信公众平台SDK
+ *  | Description:   Imagick Scale
  *  +----------------------------------------------------------------------
  **/
 
@@ -38,7 +38,6 @@ class Client
      */
     public function thumb($file_name,$path='',$width=100,$height=100){
         return $this->Thumb->image_thumb($file_name,$path,$width,$height);
-
     }
 
 }
