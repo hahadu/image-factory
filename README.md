@@ -20,7 +20,7 @@
         echo Factory::image_to_text()->to_text_color($image);
 
 ```
-*创建缩略图
+* 创建缩略图
 ```
         $image = 'image.png';
         $config = new Config();
