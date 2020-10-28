@@ -21,9 +21,11 @@ namespace Hahadu\ImageFactory\Kernel\Helper;
 use Hahadu\Helper\FilesHelper;
 use Hahadu\Helper\StringHelper;
 use Hahadu\ImageFactory\Confing\Config;
+use Hahadu\ImageFactory\Kernel\Models\AddText;
 
 class BaseHelper
 {
+    private $AddText;
     private $config;
     /****
      * @var Config
@@ -35,7 +37,8 @@ class BaseHelper
      */
     public function __construct($config){
         $this->config = $config;
-        $this->save_path = $config->setSavePath;
+        $this->save_path = $config->getSavePath;
+     //   $this->AddText = new AddText();
     }
     public function mkdir($dirname){
         return FilesHelper::mkdir($dirname);
@@ -43,7 +46,7 @@ class BaseHelper
     public function check_chines($string){
         return StringHelper::check_chines($string);
     }
-    public function re_substr($string, $start=0, $length, $suffix=true, $charset="utf-8"){
+    public function re_substr($string, $start=0, $length=10, $suffix=true, $charset="utf-8"){
         return StringHelper::re_substr($string,$start,$length,$suffix,$charset);
     }
     public function get_save_path($save_path){
@@ -52,5 +55,8 @@ class BaseHelper
         }
         $this->mkdir($this->save_path);
         return $this->save_path;
+    }
+    public function get_chines($text){
+        return StringHelper::get_chines($text);
     }
 }

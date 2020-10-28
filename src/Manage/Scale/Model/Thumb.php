@@ -31,7 +31,7 @@ class Thumb
     private $imagick;
     public function __construct($kernel){
         $this->_kernel = $kernel;
-        $this->path =$this->_kernel->config->setSavePath;
+        $this->path =$this->_kernel->config->getSavePath;
         $this->imagick = $this->_kernel->Imagick($this->file_name);
     }
     /****

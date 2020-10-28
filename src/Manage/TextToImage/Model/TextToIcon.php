@@ -69,7 +69,7 @@ class TextToIcon
 
             $draw->setFontWeight($font_weight);
 
-            $draw->setFont($this->_kernel->config->setFonts);
+            $draw->setFont($this->_kernel->config->getFonts);
 
             $image->annotateImage($draw, $text_x, $text_y, $text_angle,$check($text) );
 

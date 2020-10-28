@@ -16,6 +16,7 @@
  **/
 
 namespace Hahadu\ImageFactory\Manage\TextToImage;
+use Hahadu\ImageFactory\Manage\TextToImage\Model\TextAddImage;
 use Hahadu\ImageFactory\Manage\TextToImage\Model\TextToAvatar;
 use Hahadu\ImageFactory\Manage\TextToImage\Model\TextToIcon;
 
@@ -24,10 +25,12 @@ class Client
 {
     protected $TextToAvatar;
     protected $TextToIcon;
+    public $TextAddImage;
 
     public function __construct($kernel){
         $this->TextToAvatar = new TextToAvatar($kernel);
         $this->TextToIcon = new TextToIcon($kernel);
+        $this->TextAddImage = new TextAddImage($kernel);
     }
     public function text_to_avatar($text){
         return $this->TextToAvatar->text_to_avatar($text);

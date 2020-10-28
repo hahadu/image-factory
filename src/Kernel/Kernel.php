@@ -34,7 +34,6 @@ class Kernel
     public function __construct($config){
         $this->config = $config;
         $this->base = new BaseHelper($config);
-    //    $this->chars = $config->chars;
     }
     public function Imagick($files = null){
         return new Imagick($files);
