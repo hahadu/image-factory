@@ -3,6 +3,14 @@
 
 设计初衷：大多数时候，imagick执行效率比GD高，业务代码量也比GD少
 
+项目依赖php-imagick扩展，
+
+安装前请确保安装了php-imagick
+- debian/ubuntu sudo apt install php-imagick
+
+安装项目：
+- composer require hahadu/image-factory
+
 已实现的功能：
 * 图像转文字像素 [旧版](https://github.com/hahadu/image-to-text)
 * 创建图像缩略图
