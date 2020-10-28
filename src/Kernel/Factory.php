@@ -16,25 +16,41 @@
  **/
 
 namespace Hahadu\ImageFactory\Kernel;
-use Hahadu\ImageFactory\Client\ImageToText;
-
+use Hahadu\ImageFactory\Manage\ImageToText\Client as ImageToText;
+use Hahadu\ImageFactory\Manage\Scale\Client as Scale;
+use Hahadu\ImageFactory\Helper\BaseHelper;
 class Factory
 {
     protected static $ImageToText;
     protected $kernel;
+    private static $Base;
+    private static $instance;
+    private static $Scale;
+
     //构造方法
-    public function __construct(){
-        $this->kernel = new Kernel();
+    public function __construct($config){
+        $this->kernel = new Kernel($config);
+        self::$Base = new BaseHelper($config);
         self::$ImageToText = new ImageToText($this->kernel);
+        self::$Scale = new Scale($this->kernel);
 
     }
-
     //参数设置
-    static public function setOptions(){
-
+    static public function setOptions($config){
+        if (!(self::$instance instanceof self)) {
+            self::$instance = new self($config);
+        }
+        return self::$instance;
     }
-    static public function image_to_text($images='', $flag=true){
-        return self::$ImageToText->to_text($images, $flag);
+    static public function base(){
+        return self::$Base;
+    }
+    static public function scale(){
+        return self::$Scale;
+    }
+
+    static public function image_to_text(){
+        return self::$ImageToText;
     }
 
 }

@@ -16,6 +16,8 @@
  **/
 
 namespace Hahadu\ImageFactory\Kernel;
+use Hahadu\ImageFactory\Confing\Config;
+use Hahadu\ImageFactory\Helper\BaseHelper;
 use Imagick;
 use ImagickDraw;
 use ImagickPixel;
@@ -23,9 +25,16 @@ use ImagickPixel;
 class Kernel
 {
 
-    public $chars;
-    public function __construct(){
-        $this->chars = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+ //   public $chars;
+    /****
+     * @var Config
+     */
+    public $config;
+    public $base;
+    public function __construct($config){
+        $this->config = $config;
+        $this->base = new BaseHelper($config);
+    //    $this->chars = $config->chars;
     }
     public function Imagick($files = null){
         return new Imagick($files);
@@ -35,9 +44,6 @@ class Kernel
     }
     public function ImagickPixel($color = null){
         return new ImagickPixel($color);
-    }
-    public function chars($string=''){
-        return $this->chars;
     }
 
 }
