@@ -11,8 +11,8 @@
 安装项目：
 - composer require hahadu/image-factory
 
-已实现的功能：
-* 图像转文字像素 [旧版](https://github.com/hahadu/image-to-text)
+已实现的功能模块：
+* 图像转文字像素 [此模块旧版](https://github.com/hahadu/image-to-text)
 * 创建图像缩略图
 
 使用方法
