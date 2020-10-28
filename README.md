@@ -4,7 +4,7 @@
 设计初衷：大多数时候，imagick执行效率比GD高，业务代码量也比GD少
 
 已实现的功能：
-* 图像转文字像素 （旧版）[https://github.com/hahadu/image-to-text]
+* 图像转文字像素 [旧版](https://github.com/hahadu/image-to-text)
 * 创建图像缩略图
 
 使用方法
