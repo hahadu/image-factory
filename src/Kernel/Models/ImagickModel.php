@@ -9,17 +9,18 @@
  *  +----------------------------------------------------------------------
  *  | Author: hahadu <582167246@qq.com>
  *  +----------------------------------------------------------------------
- *  | Date: 2020/10/28 下午6:53
+ *  | Date: 2020/10/29 下午9:34
  *  +----------------------------------------------------------------------
- *  | Description:   静态方法
+ *  | Description:   ImagickModel
  *  +----------------------------------------------------------------------
  **/
 
-namespace Hahadu\ImageFactory\Confing;
+namespace Hahadu\ImageFactory\Kernel\Models;
 
-
-class Constants
+class ImagickModel extends \Imagick
 {
-    const DS = '/';
+    public function set_images(){
+
+    }
 
 }

@@ -16,9 +16,11 @@
  **/
 
 namespace Hahadu\ImageFactory\Kernel;
+use Hahadu\ImageFactory\Kernel\Extend\ImagickConfig;
 use Hahadu\ImageFactory\Manage\ImageToText\Client as ImageToText;
 use Hahadu\ImageFactory\Manage\Scale\Client as Scale;
 use Hahadu\ImageFactory\Manage\TextToImage\Client as TextToImage;
+use Hahadu\ImageFactory\Manage\ImageToImage\Client as ImageToImage;
 use Hahadu\ImageFactory\Kernel\Helper\BaseHelper;
 class Factory
 {
@@ -28,6 +30,8 @@ class Factory
     private static $instance;
     private static $Scale;
     private static $TextToImage;
+    private static $ImageToImage;
+    private static $config;
 
     //构造方法
     public function __construct($config){
@@ -36,10 +40,12 @@ class Factory
         self::$ImageToText = new ImageToText($this->kernel);
         self::$TextToImage = new TextToImage($this->kernel);
         self::$Scale = new Scale($this->kernel);
+        self::$ImageToImage = new ImageToImage($this->kernel);
 
     }
     //参数设置
     static public function setOptions($config){
+        $config = new ImagickConfig($config);
         if (!(self::$instance instanceof self)) {
             self::$instance = new self($config);
         }

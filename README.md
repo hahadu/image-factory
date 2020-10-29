@@ -21,7 +21,7 @@
 使用方法
 * 引入命名空间
 ```
-use Hahadu\ImageFactory\Confing\Config;
+use Hahadu\ImageFactory\Config\Config;
 use Hahadu\ImageFactory\Kernel\Factory;
 
 ```
@@ -41,10 +41,10 @@ use Hahadu\ImageFactory\Kernel\Factory;
 ```
         $image = 'image.png';
         $config = new Config();
-        $config->getSavePath = 'images/thumb/'; //配置缓存目录
+        $config->savePath = 'images/thumb/'; //配置缓存目录
         Factory::setOptions($config);
         //thumb 四个参数 
-        //其中设置$path参数会覆盖$config->getSavePath;null即可
+        //其中设置$path参数会覆盖$config->savePath;null即可
         //返回文件路径
         $thumb_url = thumb($image=$image,$path='',$width=100,$height=100);
 
@@ -55,7 +55,7 @@ use Hahadu\ImageFactory\Kernel\Factory;
 - > 注意:汉字目前只截取第一个字符，字母截取前两个字符，汉字与英文字母同时只能存在一个
 ```
         $config = new Config();
-        $config->getSavePath = 'images/';
+        $config->savePath = 'images/';
         Factory::setOptions($config);
         //生成.png格式头像
         $avatar_url = Factory::text_to_image()->text_to_icon('HahaDu'); //截取：Ha
@@ -63,4 +63,31 @@ use Hahadu\ImageFactory\Kernel\Factory;
         //生成.icon格式图标
         $icon_url = Factory::text_to_image()->text_to_icon('哈哈'); //截取：哈
         echo '<img src="'.$icon_url.'"/>';
+```
+* 图像添加文字水印
+```puml
+        $image = 'iphonex.jpg';
+        $config = new Config();
+        $config->setSavePath = 'images/';
+        $CONFIG->waterMarkText = 'power by hahadu/image-factory'; 设置水印文字，支持\n换行符
+        $config->TextStyle = [
+        //支持的配置项
+            'font' =>'雅黑.ttf',字体,需要指定字体路径
+            'font_size' => 20, 字体大小
+            'font_weight' => 500, 字体粗细
+            'fill_color' => '#ffffffff',字体颜色，支持标准色值，
+            'under_color' => '#ffffffff',背景颜色，支持标准色值
+            'fill_opacity' => '0.5', 浮点数0-1，透明度，这里设置透明度会覆盖fill_color中的透明度
+        ];
+        Factory::setOptions($config);
+         * @param string|null $image 图像路径
+         * @param string|float $x 水印位置横向坐标 数字 字符串目前支持' left '、' right '、' center '
+         * @param string|float $y 水印位置纵向坐标 数字 字符串目前支持' top '、' down '、' center '
+         * @param null|string $path 文件保存路径
+         * @param array $option 自定义设置，覆盖config->TextStyle[]设置,
+         * 如果$option['waterMarkText']存在则覆盖$config->waterMarkText中设置的默认值
+         * 区分大小写
+        $text_water_mark = Factory::text_to_image()->TextAddImage->water_mark($image,$x='right',$y='down',$path=null,$option=[]);
+        echo  '<img src="'.$text_water_mark.'"/>';
+
 ```

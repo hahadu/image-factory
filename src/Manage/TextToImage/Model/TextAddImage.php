@@ -18,7 +18,7 @@
 namespace Hahadu\ImageFactory\Manage\TextToImage\Model;
 
 
-use Hahadu\ImageFactory\Confing\Constants;
+use Hahadu\ImageFactory\Kernel\Extend\Constants;
 use Hahadu\ImageFactory\Kernel\Kernel;
 use Hahadu\ImageFactory\Kernel\Models\AddText;
 
@@ -31,6 +31,7 @@ class TextAddImage
     private $path;
     private $config;
     private $AddText;
+    private $style=[];
 
     /****
      * TextAddImage constructor.
@@ -39,9 +40,20 @@ class TextAddImage
     public function __construct($kernel){
         $this->_kernel = $kernel;
         $this->config = $kernel->config;
+        $this->style = $this->config->getTextStyle();
         $this->AddText = new AddText($kernel);
     }
-    public function getPic($image=null,$path=null){
+
+    /****
+     * @param null $image
+     * @param string|float $x
+     * @param string|float $y
+     * @param null $path
+     * @param array|null $option 自定义水印设置
+     * @return string
+     */
+    public function water_mark($image=null,$x='right',$y='down',$path=null,$option=[]){
+        array_replace_recursive($this->style,$option);
         $this->path = $this->_kernel->base->get_save_path($path);
         $image_data = $this->_kernel->Imagick($image); //图像
         //获取图像信息
@@ -49,28 +61,48 @@ class TextAddImage
         $image_width  = $image_data->getImageWidth();
         $image_height = $image_data->getImageHeight();
         $image_file_name  = $image_data->getImageFilename();
-        dump($image_width,$image_height);
-        $WaterMark = $this->config->getWaterMark;
+        if(isset($option['waterMarkText'])&&null!=$option['waterMarkText']){
+            $WaterMark = $option['waterMarkText'];
+        }else{
+            $WaterMark = $this->config->getWaterMarkText();
+        }
+        $style = $this->style;
 
-        $len = mb_strlen($this->config->getWaterMark);  //字符串长度
-
-        $style['font'] = $this->_kernel->config->getFonts; ///微软雅黑字体 解决中文乱码
-        dump($len);
-
-        //return;
-
-        $style['font_size'] = 20;
         //字符串长度 + 字符宽度 + 空格
-        $text_x = $image_width-$len*$style['font_size']+$image_width/$len-$len/$style['font_size'];
-        $text_y = $image_height-$style['font_size']/3;
-        dump($text_x);
+        $line = mb_substr_count($WaterMark,PHP_EOL)+1;
+        $len = $this->_kernel->base->get_str_max_len($WaterMark,$line);
 
-        $style['fill_color'] = '#666';
+        switch ($x){
+            case 'right':
+                $text_x = $this->_kernel->base->position()->text_right($image_width,$len,$style['font_size']);
+                break;
+            case 'center':
+                $text_x = $this->_kernel->base->position()->text_center_x($image_width,$len,$style['font_size']);
+                break;
+            case is_int($x) :
+                $text_x = $x;
+                break;
+            default :
+                $text_x = $style['font_size']/2.5;
+                break;
+        }
+        switch ($y){
+            case 'down':
+                $text_y = $this->_kernel->base->position()->text_down($image_height,$line,$style['font_size']);
+                break;
+            case 'center':
+                $text_y = $this->_kernel->base->position()->text_center_y($image_height,$line,$style['font_size']);
+                break;
+            case is_int($y):
+                $text_y = $y;
+                break;
+            default :
+                $text_y = $style['font_size']*1.15;
+                break;
+        }
 
-        //$text=mb_convert_encoding($text,'UTF-8'); //iconv("GBK","UTF-8//IGNORE",$text);
-
-        $this->AddText->add_text($image_data,$this->config->getWaterMark, $text_x, $text_y, 0,$style);
-        $file = $this->path.'text.'.mb_strtolower($image_data->getImageFormat());
+        $this->AddText->add_text($image_data,$WaterMark,$text_x,$text_y,0,$style);
+        $file = $this->path.(base64_encode('time'.$image.$WaterMark)).Constants::DOT.mb_strtolower($image_data->getImageFormat());
 
         $image_data->writeImage($file);
 
@@ -80,3 +112,4 @@ class TextAddImage
 
 
 }
+

@@ -42,33 +42,7 @@ class AddText
      */
     public function add_text(& $imagick, $text, $x = 0, $y = 0, $angle = 0, $style = array()) {
 
-        $draw = $this->_kernel->ImagickDraw();
-
-        if (isset ( $style ['font'] ))
-
-            $draw->setFont ( $style ['font'] );
-
-        if (isset ( $style ['font_size'] ))
-
-            $draw->setFontSize ( $style ['font_size'] );
-
-        if (isset ( $style ['fill_color'] ))
-
-            $draw->setFillColor ( $style ['fill_color'] );
-
-        if (isset ( $style ['under_color'] ))
-
-            $draw->setTextUnderColor ( $style ['under_color'] );
-
-        if (isset ( $style ['font_family'] ))
-
-            $draw->setfontfamily( $style ['font_family'] );
-
-        if (isset ( $style ['font'] ))
-
-            $draw->setfont($style ['font'] );
-
-        $draw->settextencoding('UTF-8');
+        $draw = $this->_kernel->ImagickDraw()->set_text($style);
 
         if (strtolower ($imagick->getImageFormat ()) == 'gif') {
 
@@ -81,9 +55,7 @@ class AddText
         } else {
 
             $imagick->annotateImage ( $draw, $x, $y, $angle, $text );
-
         }
-
     }
 
 }

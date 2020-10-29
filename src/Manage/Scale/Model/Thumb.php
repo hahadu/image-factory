@@ -11,13 +11,13 @@
  *  +----------------------------------------------------------------------
  *  | Date: 2020/10/28 下午5:01
  *  +----------------------------------------------------------------------
- *  | Description:   Imagick thumb
+ *  | Description:   ImagickModel thumb
  *  +----------------------------------------------------------------------
  **/
 
 namespace Hahadu\ImageFactory\Manage\Scale\Model;
 
-use Hahadu\ImageFactory\Confing\Constants;
+use Hahadu\ImageFactory\Kernel\Extend\Constants;
 use Hahadu\ImageFactory\Kernel\Kernel;
 
 class Thumb
@@ -31,7 +31,7 @@ class Thumb
     private $imagick;
     public function __construct($kernel){
         $this->_kernel = $kernel;
-        $this->path =$this->_kernel->config->getSavePath;
+        $this->path =$this->_kernel->config->getSavePath();
         $this->imagick = $this->_kernel->Imagick($this->file_name);
     }
     /****

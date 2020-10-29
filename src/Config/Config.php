@@ -9,35 +9,35 @@
  *  +----------------------------------------------------------------------
  *  | Author: hahadu <582167246@qq.com>
  *  +----------------------------------------------------------------------
- *  | Date: 2020/10/28 下午5:00
+ *  | Date: 2020/10/29 下午10:12
  *  +----------------------------------------------------------------------
- *  | Description:   ImagickModel Scale
+ *  | Description:   微信公众平台SDK
  *  +----------------------------------------------------------------------
  **/
 
-namespace Hahadu\ImageFactory\Manage\Scale;
-use Hahadu\ImageFactory\Manage\Scale\Model\Thumb;
+namespace Hahadu\ImageFactory\Config;
 
 
-class Client
+class Config
 {
-    private $_kernel;
-    private $Thumb;
-    public function __construct($kernel){
-        $this->_kernel = $kernel;
-        $this->Thumb = new Thumb($kernel);
-    }
-
-    /****
-     * 创建缩略图
-     * @param string $file_name 要压缩的文件名
-     * @param string $path 文件保存目录
-     * @param int $width 压缩图片宽
-     * @param int $height 压缩图片高
-     * @return string
+    /*****
+     * @var string 设置随机字符串
      */
-    public function thumb($file_name,$path='',$width=100,$height=100){
-        return $this->Thumb->image_thumb($file_name,$path,$width,$height);
-    }
+    public $chars = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+    /****
+     * @var string 默认文件保存路径
+     */
+    public $savePath = 'images/';
+    /****
+     * @var string 默认文本水印字符串
+     */
+    public $waterMarkText ="power by ha顶戴hadu楕沙发上/i\nmage-factory"; //设置水印
+    /****
+     * @var array 默认文本水印样式
+     */
+    public $TextStyle = [
+        'font_size' => 20,
+    ];
+    public $fonts = '';
 
 }

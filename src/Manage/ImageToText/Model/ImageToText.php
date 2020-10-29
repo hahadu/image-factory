@@ -30,7 +30,7 @@ class ImageToText
 
     public function __construct($kernel){
         $this->_kernel = $kernel;
-        $this->chars = $this->_kernel->config->chars;
+        $this->chars = $this->_kernel->config->getChars();
     }
     public function to_text_color($images='', $flage=true){
         $image_data = $this->get_img_data($images,$flage);
