@@ -9,20 +9,29 @@
  *  +----------------------------------------------------------------------
  *  | Author: hahadu <582167246@qq.com>
  *  +----------------------------------------------------------------------
- *  | Date: 2020/10/28 下午6:53
+ *  | Date: 2020/10/30 下午12:12
  *  +----------------------------------------------------------------------
- *  | Description:   静态方法
+ *  | Description:   FilesHelper
  *  +----------------------------------------------------------------------
  **/
 
-namespace Hahadu\ImageFactory\Kernel\Extend;
+namespace Hahadu\ImageFactory\Kernel\Helper;
 
 
-class Constants
+use Hahadu\Helper\FilesHelper;
+
+trait FilesTrait
 {
-    const DS = '/';
-    const DOT = '.';
-    const MUS = '-';
-    const UND = '_';
+    public function mkdir($dirname){
+        return FilesHelper::mkdir($dirname);
+    }
+    public function get_save_path($save_path){
+        if(null!=$save_path){
+            $this->save_path = $save_path;
+        }
+        $this->mkdir($this->save_path);
+        return $this->save_path;
+    }
+
 
 }

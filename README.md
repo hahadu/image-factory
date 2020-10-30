@@ -1,9 +1,9 @@
 # image-class
 基于imagick的图像处理类
 
-设计初衷：大多数时候，imagick执行效率比GD高，业务代码量也比GD少
+设计初衷：大多数时候，从GD创建图像操作繁琐，执行效率低下，imagick执行效率比GD高，
 
-项目部依赖任何框架，因此你可以与你的任何项目集成。
+项目不依赖任何框架，因此你可以与你的任何项目集成。
 
 项目依赖php-imagick扩展，
 
@@ -17,6 +17,9 @@
 * 图像转文字像素 [此模块旧版](https://github.com/hahadu/image-to-text)
 * 创建图像缩略图
 * 根据文字前两个字符创建头像(.png)和图标(.icon)
+* 给图像添加文字水印
+* 从文本创建图像
+
 
 使用方法
 * 引入命名空间
@@ -89,5 +92,36 @@ use Hahadu\ImageFactory\Kernel\Factory;
          * 区分大小写
         $text_water_mark = Factory::text_to_image()->TextAddImage->water_mark($image,$x='right',$y='down',$path=null,$option=[]);
         echo  '<img src="'.$text_water_mark.'"/>';
+
+```
+* 从文本创建图像
+```
+        $config = new Config();
+        $config->setSavePath = 'images/';
+  //      $config->chars = '01';
+        Factory::setOptions($config);
+        //设置文本
+        $text  ="北国风光，千里冰封，万里雪飘。\n
+望长城内外，惟余莽莽；大河上下，顿失滔滔。\n
+山舞银蛇，原驰蜡象，欲与天公试比高。\n
+须晴日，看红装素裹，分外妖娆。\n
+江山如此多娇，引无数英雄竞折腰。\n
+惜秦皇汉武，略输文采；唐宗宋祖，稍逊风骚。\n
+一代天骄，成吉思汗，只识弯弓射大雕。\n
+俱往矣，数风流人物，还看今朝。\n";
+
+        $option=[
+            'background' => '#ff3cc1', //背景颜色
+            'fill_color' => '#fff', //文字颜色
+            'font_size'=> '20', //文字大小
+        //    'image_width'=>80, //图片宽度
+        //    'image_height'=>80, //图片高
+        //    'filename' => 'a_test_image', //文件名
+            'format' => 'jpg', //文件格式后缀
+        ];
+        //此处option设置对应值会覆盖$config->TextStyle中的默认值
+        $text_mark_url = Factory::text_to_image()->text_create_image($text,$option);
+      //  $thumb_url = Factory::scale()->thumb($image);
+        echo '<img src="'.$text_mark_url.'"/>';
 
 ```

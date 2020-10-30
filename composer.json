@@ -4,7 +4,11 @@
     "type": "library",
     "require": {
         "php": ">=7.0",
-        "ext-imagick": "*"
+        "ext-imagick": "*",
+        "ext-mbstring": "*",
+        "ext-bcmath": "*",
+        "ext-json": "*",
+        "hahadu/helper-function": "^0.6"
     },
 
     "license": "Apache-2.0",

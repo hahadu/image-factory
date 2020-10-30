@@ -27,6 +27,8 @@ use Hahadu\ImageFactory\Kernel\Models\PositionModel;
 
 class BaseHelper
 {
+    use StringTrait;
+    use FilesTrait;
     private $AddText;
     private $config;
     /****
@@ -35,30 +37,11 @@ class BaseHelper
 
     private $save_path;
     /****
-     * @var \Hahadu\ImageFactory\Kernel\Extend\ImagickConfig $config
+     * @var ImagickConfig $config
      */
     public function __construct($config){
         $this->config = $config;
         $this->save_path = $config->getSavePath();
-    }
-    public function mkdir($dirname){
-        return FilesHelper::mkdir($dirname);
-    }
-    public function check_chines($string){
-        return StringHelper::check_chines($string);
-    }
-    public function re_substr($string, $start=0, $length=10, $suffix=true, $charset="utf-8"){
-        return StringHelper::re_substr($string,$start,$length,$suffix,$charset);
-    }
-    public function get_save_path($save_path){
-        if(null!=$save_path){
-            $this->save_path = $save_path;
-        }
-        $this->mkdir($this->save_path);
-        return $this->save_path;
-    }
-    public function get_chines($text){
-        return StringHelper::get_chines($text);
     }
     /****
      * 获取字符串最长一行的长度
@@ -98,6 +81,20 @@ class BaseHelper
 
     public function position(){
         return new PositionModel();
+    }
+
+    /****
+     * 获取文本行数
+     * @param $text
+     * @param string $feed 换行符
+     * @return int
+     */
+    public function get_text_line($text){
+        try {
+            return mb_substr_count($text,PHP_EOL)+1;
+        }catch (\Exception $e){
+            return json_encode($e);
+        }
     }
 
 

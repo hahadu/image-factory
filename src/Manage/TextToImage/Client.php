@@ -19,6 +19,7 @@ namespace Hahadu\ImageFactory\Manage\TextToImage;
 use Hahadu\ImageFactory\Manage\TextToImage\Model\TextAddImage;
 use Hahadu\ImageFactory\Manage\TextToImage\Model\TextToAvatar;
 use Hahadu\ImageFactory\Manage\TextToImage\Model\TextToIcon;
+use Hahadu\ImageFactory\Manage\TextToImage\Model\TextCreateImage;
 
 
 class Client
@@ -26,11 +27,13 @@ class Client
     protected $TextToAvatar;
     protected $TextToIcon;
     protected $TextAddImage;
+    protected $TextCreateImage;
 
     public function __construct($kernel){
         $this->TextToAvatar = new TextToAvatar($kernel);
         $this->TextToIcon = new TextToIcon($kernel);
         $this->TextAddImage = new TextAddImage($kernel);
+        $this->TextCreateImage = new TextCreateImage($kernel);
     }
     public function text_to_avatar($text){
         return $this->TextToAvatar->text_to_avatar($text);
@@ -51,6 +54,9 @@ class Client
      */
     public function text_water_mask($image=null,$x='right',$y='down',$path=null,$option=[]){
         return $this->TextAddImage->water_mark($image,$x,$y,$path,$option);
+    }
+    public function text_create_image($text,$option=[]){
+        return $this->TextCreateImage->text_create_image($text,$option);
     }
 
 }

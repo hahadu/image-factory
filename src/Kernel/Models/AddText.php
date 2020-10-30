@@ -33,7 +33,7 @@ class AddText
     }
 
     /****
-     * @param \Imagick $imagick
+     * @param ImagickModel $imagick
      * @param string $text 添加的文本
      * @param int $x
      * @param int $y
@@ -41,7 +41,7 @@ class AddText
      * @param array $style
      */
     public function add_text(& $imagick, $text, $x = 0, $y = 0, $angle = 0, $style = array()) {
-
+        dump($style);
         $draw = $this->_kernel->ImagickDraw()->set_text($style);
 
         if (strtolower ($imagick->getImageFormat ()) == 'gif') {

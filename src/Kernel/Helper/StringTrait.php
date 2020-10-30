@@ -9,20 +9,27 @@
  *  +----------------------------------------------------------------------
  *  | Author: hahadu <582167246@qq.com>
  *  +----------------------------------------------------------------------
- *  | Date: 2020/10/28 下午6:53
+ *  | Date: 2020/10/30 下午12:14
  *  +----------------------------------------------------------------------
- *  | Description:   静态方法
+ *  | Description:   StringTrait
  *  +----------------------------------------------------------------------
  **/
 
-namespace Hahadu\ImageFactory\Kernel\Extend;
+namespace Hahadu\ImageFactory\Kernel\Helper;
 
 
-class Constants
+use Hahadu\Helper\StringHelper;
+
+trait StringTrait
 {
-    const DS = '/';
-    const DOT = '.';
-    const MUS = '-';
-    const UND = '_';
+    public function check_chines($string){
+        return StringHelper::check_chines($string);
+    }
+    public function re_substr($string, $start=0, $length=10, $suffix=true, $charset="utf-8"){
+        return StringHelper::re_substr($string,$start,$length,$suffix,$charset);
+    }
+    public function get_chines($text){
+        return StringHelper::get_chines($text);
+    }
 
 }
