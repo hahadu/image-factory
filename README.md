@@ -72,7 +72,7 @@ use Hahadu\ImageFactory\Kernel\Factory;
         $image = 'iphonex.jpg';
         $config = new Config();
         $config->setSavePath = 'images/';
-        $CONFIG->waterMarkText = 'power by hahadu/image-factory'; 设置水印文字，支持\n换行符
+        $CONFIG->waterMarkText = 'power by hahadu/image-factory'; //设置水印文字，支持\n换行符
         $config->TextStyle = [
         //支持的配置项
             'font' =>'雅黑.ttf',字体,需要指定字体路径
@@ -124,3 +124,4 @@ use Hahadu\ImageFactory\Kernel\Factory;
         echo '<img src="'.$text_mark_url.'"/>';
 
 ```
+![demo](./demo/text_create_image.jpg)
