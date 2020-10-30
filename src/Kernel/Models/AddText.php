@@ -41,7 +41,6 @@ class AddText
      * @param array $style
      */
     public function add_text(& $imagick, $text, $x = 0, $y = 0, $angle = 0, $style = array()) {
-        dump($style);
         $draw = $this->_kernel->ImagickDraw()->set_text($style);
 
         if (strtolower ($imagick->getImageFormat ()) == 'gif') {

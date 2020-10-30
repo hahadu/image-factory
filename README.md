@@ -23,14 +23,14 @@
 
 使用方法
 * 引入命名空间
-```
+```php
 use Hahadu\ImageFactory\Config\Config;
 use Hahadu\ImageFactory\Kernel\Factory;
 
 ```
 * 图像转文字像素
 
-```puml
+```php
 //
         $image = 'iphonex.jpg';
         $config = new Config(); //获取配置信息
@@ -56,7 +56,7 @@ use Hahadu\ImageFactory\Kernel\Factory;
 ```
 * 根据文本前两个字符串创建头像
 - > 注意:汉字目前只截取第一个字符，字母截取前两个字符，汉字与英文字母同时只能存在一个
-```
+```php
         $config = new Config();
         $config->savePath = 'images/';
         Factory::setOptions($config);
@@ -68,7 +68,7 @@ use Hahadu\ImageFactory\Kernel\Factory;
         echo '<img src="'.$icon_url.'"/>';
 ```
 * 图像添加文字水印
-```puml
+```php
         $image = 'iphonex.jpg';
         $config = new Config();
         $config->setSavePath = 'images/';
@@ -95,7 +95,7 @@ use Hahadu\ImageFactory\Kernel\Factory;
 
 ```
 * 从文本创建图像
-```
+```php
         $config = new Config();
         $config->setSavePath = 'images/';
   //      $config->chars = '01';
@@ -121,7 +121,6 @@ use Hahadu\ImageFactory\Kernel\Factory;
         ];
         //此处option设置对应值会覆盖$config->TextStyle中的默认值
         $text_mark_url = Factory::text_to_image()->text_create_image($text,$option);
-      //  $thumb_url = Factory::scale()->thumb($image);
         echo '<img src="'.$text_mark_url.'"/>';
 
 ```
