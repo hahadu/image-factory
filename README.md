@@ -74,7 +74,10 @@ use Hahadu\ImageFactory\Kernel\Factory;
         $icon_url = Factory::text_to_image()->text_to_icon('哈哈'); //截取：哈
         echo '<img src="'.$icon_url.'"/>';
 ```
-
+* 框架内置字体调用方法：
+```php
+Factory::base()->get_font_path($fontname='SourceHanSansCN-Light.otf');
+```
 * 图像添加文字水印
 ```php
         $image = 'iphonex.jpg';
