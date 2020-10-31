@@ -33,12 +33,20 @@ class BaseHelper
      */
 
     private $save_path;
+    private $get_font_path;
     /****
      * @var ImagickConfig $config
      */
     public function __construct($config){
         $this->config = $config;
         $this->save_path = $config->getSavePath();
+    }
+    private function static_path(){
+        return dirname(dirname(dirname(__DIR__))).'/static/';
+    }
+
+    public function get_font_path($font=''){
+        return $this->static_path().$font;
     }
     /****
      * 获取字符串最长一行的长度
