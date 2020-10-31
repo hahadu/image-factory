@@ -16,11 +16,18 @@
  **/
 
 namespace Hahadu\ImageFactory\Manage\ImageToImage;
-
+use Hahadu\ImageFactory\Manage\ImageToImage\Model\ImageAddImage;
 
 class Client
 {
-    public function __construct($kernel){
+    private $ImageAddImage;
+    public function __construct($kernel)
+    {
+        $this->ImageAddImage = new ImageAddImage($kernel);
+    }
+    public function image_water_mark($image,$x='right',$y='down',$path=null,$options=[]){
+        return $this->ImageAddImage->water_mark($image,$x,$y,$path,$options);
 
     }
+
 }

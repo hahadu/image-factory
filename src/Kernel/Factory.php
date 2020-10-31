@@ -22,6 +22,7 @@ use Hahadu\ImageFactory\Manage\Scale\Client as Scale;
 use Hahadu\ImageFactory\Manage\TextToImage\Client as TextToImage;
 use Hahadu\ImageFactory\Manage\ImageToImage\Client as ImageToImage;
 use Hahadu\ImageFactory\Kernel\Helper\BaseHelper;
+
 class Factory
 {
     private static $ImageToText;
@@ -64,5 +65,9 @@ class Factory
     static public function text_to_image(){
         return self::$TextToImage;
     }
+    static public function image_to_image(){
+        return self::$ImageToImage;
+    }
+
 
 }

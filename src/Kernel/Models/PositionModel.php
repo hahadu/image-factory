@@ -32,5 +32,17 @@ class PositionModel
     public function text_down($image_height,$text_line,$font_size){
         return $image_height-$text_line*1.2*$font_size;
     }
+    public function image_center_x($image_width,$min_width){
+        return ($image_width-$min_width)/2;
+    }
+    public function image_center_y($image_width,$min_width){
+        return ($image_width-$min_width)/2;
+    }
+    public function image_down($image_height,$min_height){
+        return $image_height-$min_height;
+    }
+    public function image_right($image_width,$min_width){
+        return $image_width-$min_width;
+    }
 
 }

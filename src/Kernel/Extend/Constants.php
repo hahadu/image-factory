@@ -16,9 +16,10 @@
  **/
 
 namespace Hahadu\ImageFactory\Kernel\Extend;
+use Imagick;
 
 
-class Constants
+class Constants extends Imagick
 {
     const DS = '/';
     const DOT = '.';

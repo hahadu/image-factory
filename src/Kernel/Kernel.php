@@ -20,7 +20,7 @@ use Hahadu\ImageFactory\Config\Config;
 use Hahadu\ImageFactory\Kernel\Helper\BaseHelper;
 use Hahadu\ImageFactory\Kernel\Extend\ImagickConfig;
 use Hahadu\ImageFactory\Kernel\Models\ImagickDrawModel;
-use Hahadu\ImageFactory\Kernel\Models\ImagickModel as Imagick;
+use Imagick;
 use ImagickPixel;
 
 class Kernel

@@ -30,6 +30,9 @@ class ImagickConfig
     public function __construct($config){
         return $this->config = $config;
     }
+    private function static_path(){
+        return dirname(dirname(dirname(__DIR__)));
+    }
     /****
      * @return string 默认文件保存路径
      */
@@ -49,12 +52,18 @@ class ImagickConfig
     public function getWaterMarkText(){
         return $this->config->waterMarkText;
     }
+    /****
+     * @return string 默认图片水印路径
+     */
+    public function getWaterMarkImage(){
+        return $this->config->waterMarkImage;
+    }
 
     /****
      * @return array 默认文本水印样式
      */
     public function getTextStyle(){
-        $WaterMark = [
+        $TextStyle = [
             "font_size" => 20,
             "font" => $this->getFonts(),
             "fill_color" => "#aaa",
@@ -62,12 +71,20 @@ class ImagickConfig
         //    "fill_opacity" => 1, //文字透明度 会覆盖fill_color中设置的透明度
         //    "font_family" => '',
         ];
-        return array_replace_recursive($WaterMark,$this->config->TextStyle);
+        return array_replace_recursive($TextStyle,$this->config->TextStyle);
+    }
+    public function getImageStyle(){
+        $ImageStyle = [
+            "font" => $this->getFonts(),
+
+        ];
+        return array_replace_recursive($ImageStyle,$this->config->ImageStyle);
+
     }
     public function getFonts(){
         $fonts = $this->config->fonts;
         if(null == $fonts){
-            $fonts = dirname(dirname(dirname(__DIR__))).'/static/siyuanheiti.otf';
+            $fonts = $this->static_path().'/static/SourceHanSansCN-Light.otf';
         }
         return $fonts;
     }

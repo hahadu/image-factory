@@ -31,13 +31,26 @@ class Config
     /****
      * @var string 默认文本水印字符串
      */
-    public $waterMarkText ="power by ha顶戴hadu楕沙发上/i\nmage-factory"; //设置水印
+    public $waterMarkText ="power by hahadu/image-factory"; //设置水印
+    public $waterMarkImage ="dd.jpg"; //设置水印
     /****
-     * @var array 默认文本水印样式
+     * @var array 默认文本样式
      */
     public $TextStyle = [
         'font_size' => 20,
     ];
+    /****
+     * 默认图像样式
+     * @var array
+     */
+    public $ImageStyle = [
+
+
+    ];
+    /****
+     *
+     * @var string
+     */
     public $fonts = '';
 
 }

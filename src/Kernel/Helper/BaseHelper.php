@@ -16,14 +16,11 @@
  **/
 
 namespace Hahadu\ImageFactory\Kernel\Helper;
-
-
-use Hahadu\Helper\FilesHelper;
-use Hahadu\Helper\StringHelper;
 use Hahadu\ImageFactory\Config\Config;
-use Hahadu\ImageFactory\Kernel\Models\AddText;
 use Hahadu\ImageFactory\Kernel\Extend\ImagickConfig;
 use Hahadu\ImageFactory\Kernel\Models\PositionModel;
+use Hahadu\ImageFactory\Kernel\Helper\Traits\StringTrait;
+use Hahadu\ImageFactory\Kernel\Helper\Traits\FilesTrait;
 
 class BaseHelper
 {

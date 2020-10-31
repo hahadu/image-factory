@@ -33,7 +33,7 @@ class AddText
     }
 
     /****
-     * @param ImagickModel $imagick
+     * @param \Imagick $imagick
      * @param string $text 添加的文本
      * @param int $x
      * @param int $y

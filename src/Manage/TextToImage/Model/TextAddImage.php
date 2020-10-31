@@ -52,8 +52,9 @@ class TextAddImage
      * @param array|null $option 自定义水印设置
      * @return string
      */
-    public function water_mark($image=null,$x='right',$y='down',$path=null,$option=[]){
-        array_replace_recursive($this->style,$option);
+    public function water_mark($image=null,$x='right',$y='down',$option=[]){
+        $this->style = array_replace_recursive($this->style,$option);
+        $path = isset($option['path'])?$option['path']:null;
         $this->path = $this->_kernel->base->get_save_path($path);
         $image_data = $this->_kernel->Imagick($image); //图像
         //获取图像信息

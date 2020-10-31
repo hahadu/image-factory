@@ -13,15 +13,19 @@
 安装项目：
 - composer require hahadu/image-factory
 
-已实现的功能模块：
+##已实现的功能模块：
+>（按开发顺序排序）
 * 图像转文字像素 [此模块旧版](https://github.com/hahadu/image-to-text)
 * 创建图像缩略图
 * 根据文字前两个字符创建头像(.png)和图标(.icon)
 * 给图像添加文字水印
 * 从文本创建图像
+* 给图像添加图像水印
+项目使用过程有任何问题欢迎issues,或qq：582167246联系
 
 
-使用方法
+
+##使用方法
 * 引入命名空间
 ```php
 use Hahadu\ImageFactory\Config\Config;
@@ -36,6 +40,7 @@ use Hahadu\ImageFactory\Kernel\Factory;
         $config = new Config(); //获取配置信息
         $config->chars = '01';
         Factory::setOptions($config);
+        //返回html
         echo Factory::image_to_text()->to_text_black($image);
         echo Factory::image_to_text()->to_text_color($image);
 
@@ -56,9 +61,11 @@ use Hahadu\ImageFactory\Kernel\Factory;
 ```
 * 根据文本前两个字符串创建头像
 - > 注意:汉字目前只截取第一个字符，字母截取前两个字符，汉字与英文字母同时只能存在一个
+  > 添加中文到图像需要设置中文字体支持，默认使用SourceHanSansCN-Light字体
 ```php
         $config = new Config();
         $config->savePath = 'images/';
+        $config->fonts = ''; //设置字体，不设置留空即可，SourceHanSansCN-Light
         Factory::setOptions($config);
         //生成.png格式头像
         $avatar_url = Factory::text_to_image()->text_to_icon('HahaDu'); //截取：Ha
@@ -67,30 +74,33 @@ use Hahadu\ImageFactory\Kernel\Factory;
         $icon_url = Factory::text_to_image()->text_to_icon('哈哈'); //截取：哈
         echo '<img src="'.$icon_url.'"/>';
 ```
+
 * 图像添加文字水印
 ```php
         $image = 'iphonex.jpg';
         $config = new Config();
         $config->setSavePath = 'images/';
-        $CONFIG->waterMarkText = 'power by hahadu/image-factory'; //设置水印文字，支持\n换行符
+        $config->waterMarkText = 'power by hahadu/image-factory'; //设置水印文字，支持\n换行符
         $config->TextStyle = [
         //支持的配置项
-            'font' =>'雅黑.ttf',字体,需要指定字体路径
-            'font_size' => 20, 字体大小
-            'font_weight' => 500, 字体粗细
-            'fill_color' => '#ffffffff',字体颜色，支持标准色值，
-            'under_color' => '#ffffffff',背景颜色，支持标准色值
-            'fill_opacity' => '0.5', 浮点数0-1，透明度，这里设置透明度会覆盖fill_color中的透明度
+            'font' =>'雅黑.ttf',//字体,需要指定字体路径
+            'font_size' => 20, //字体大小
+            'font_weight' => 500, //字体粗细
+            'fill_color' => '#ffffffff',//字体颜色，支持标准色值，
+            'under_color' => '#ffffffff',//背景颜色，支持标准色值
+            'fill_opacity' => '0.5', //浮点数0-1，透明度，这里设置透明度会覆盖fill_color中的透明度
         ];
         Factory::setOptions($config);
+        /*
          * @param string|null $image 图像路径
          * @param string|float $x 水印位置横向坐标 数字 字符串目前支持' left '、' right '、' center '
          * @param string|float $y 水印位置纵向坐标 数字 字符串目前支持' top '、' down '、' center '
-         * @param null|string $path 文件保存路径
          * @param array $option 自定义设置，覆盖config->TextStyle[]设置,
          * 如果$option['waterMarkText']存在则覆盖$config->waterMarkText中设置的默认值
+         * 如果$option['path'] 存在则覆盖$config->setSavePath
          * 区分大小写
-        $text_water_mark = Factory::text_to_image()->TextAddImage->water_mark($image,$x='right',$y='down',$path=null,$option=[]);
+         */
+        $text_water_mark = Factory::text_to_image()->TextAddImage->water_mark($image,$x='right',$y='down',$option=[]);
         echo  '<img src="'.$text_water_mark.'"/>';
 
 ```
@@ -98,7 +108,6 @@ use Hahadu\ImageFactory\Kernel\Factory;
 ```php
         $config = new Config();
         $config->setSavePath = 'images/';
-  //      $config->chars = '01';
         Factory::setOptions($config);
         //设置文本
         $text  ="北国风光，千里冰封，万里雪飘。\n
@@ -125,3 +134,23 @@ use Hahadu\ImageFactory\Kernel\Factory;
 
 ```
 ![demo](./demo/text_create_image.jpg)
+
+* 添加图片水印
+```php
+        $image = 'iphonex.jpg';
+
+        $config = new Config();
+        $config->setSavePath = 'images/';
+        $config->waterMarkImage='dd.png';
+        Factory::setOptions($config);
+
+        $option=[
+            'format' => 'jpg', //文件格式后缀
+            'opacity' => 5,//设置图像透明度,值越大可见度越低，目前仅支持带alpha通道的图片
+            'path' => '' //自定义文件保存路径，此处会覆盖$config->setSavePath
+        ];
+
+        $img_mark_url = Factory::image_to_image()->image_water_mark($image,$x='right',$y='down',$path=null,$option);
+        return '<img src="'.$img_mark_url.'"/>';
+
+```

@@ -17,9 +17,16 @@
 
 namespace Hahadu\ImageFactory\Kernel\Models;
 
-class ImagickModel extends \Imagick
+class ImagickModel
 {
-    public function set_images(){
+    private $imagick;
+    public function __construct($imagick){
+        $this->imagick = $imagick;
+    }
+    public function set_images($style){
+
+    }
+    public function add_image(){
 
     }
 
