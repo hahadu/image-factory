@@ -46,6 +46,7 @@ class ImageToText
             }
             $result.="<br/>";
         }
+        $image_data->destroy();
         return $result;
     }
     public function to_text_black($images , $flage=true){
@@ -62,6 +63,7 @@ class ImageToText
             }
             $result.="<br/>";
         }
+        $image_data->destroy();
         return $result;
     }
 

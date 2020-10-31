@@ -61,6 +61,7 @@ class TextCreateImage
         $imagick->newImage($image_width,$image_height,$background,$format);
         $this->AddText->add_text($imagick,$text,$font_point_x,$font_point_y,0,$this->style);
         $imagick->writeImage($save_path);
+        $imagick->destroy();
 
         return Constants::DS.$save_path;
 

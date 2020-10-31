@@ -88,6 +88,7 @@ class TextToIcon
             $image->setImageFormat($this->icon_format);
 
             $image->writeImages($path,true);
+            $image->destroy();
             return Constants::DS.$path;
         }catch (\Exception $e){
             return $e;

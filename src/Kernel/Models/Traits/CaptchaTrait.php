@@ -9,22 +9,16 @@
  *  +----------------------------------------------------------------------
  *  | Author: hahadu <582167246@qq.com>
  *  +----------------------------------------------------------------------
- *  | Date: 2020/10/28 下午6:53
+ *  | Date: 2020/10/31 下午6:04
  *  +----------------------------------------------------------------------
- *  | Description:   静态方法
+ *  | Description:   Captcha
  *  +----------------------------------------------------------------------
  **/
 
-namespace Hahadu\ImageFactory\Kernel\Extend;
-use Imagick;
+namespace Hahadu\ImageFactory\Kernel\Models\Traits;
 
 
-class Constants extends Imagick
+trait CaptchaTrait
 {
-    const DS = '/';
-    const DOT = '.';
-    const MUS = '-';
-    const UND = '_';
-    const DEFAULT_FONTS = 'SourceHanSansCN-Light.otf';
 
 }

@@ -106,6 +106,7 @@ class TextAddImage
         $file = $this->path.(base64_encode('time'.$image.$WaterMark)).Constants::DOT.mb_strtolower($image_data->getImageFormat());
 
         $image_data->writeImage($file);
+        $image_data->destroy();
 
         return Constants::DS.$file;
 

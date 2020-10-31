@@ -31,7 +31,7 @@ class ImagickConfig
         return $this->config = $config;
     }
     private function static_path(){
-        return dirname(dirname(dirname(__DIR__)));
+        return dirname(dirname(dirname(__DIR__))).Constants::DS.'static/';
     }
     /****
      * @return string 默认文件保存路径
@@ -84,7 +84,7 @@ class ImagickConfig
     public function getFonts(){
         $fonts = $this->config->fonts;
         if(null == $fonts){
-            $fonts = $this->static_path().'/static/SourceHanSansCN-Light.otf';
+            $fonts = $this->static_path().'fonts'.Constants::DS.Constants::DEFAULT_FONTS;
         }
         return $fonts;
     }

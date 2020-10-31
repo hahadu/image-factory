@@ -17,6 +17,7 @@
 
 namespace Hahadu\ImageFactory\Kernel\Helper;
 use Hahadu\ImageFactory\Config\Config;
+use Hahadu\ImageFactory\Kernel\Extend\Constants;
 use Hahadu\ImageFactory\Kernel\Extend\ImagickConfig;
 use Hahadu\ImageFactory\Kernel\Models\PositionModel;
 use Hahadu\ImageFactory\Kernel\Helper\Traits\StringTrait;
@@ -42,11 +43,17 @@ class BaseHelper
         $this->save_path = $config->getSavePath();
     }
     private function static_path(){
-        return dirname(dirname(dirname(__DIR__))).'/static/';
+        return dirname(dirname(dirname(__DIR__))).Constants::DS.'static/';
     }
 
-    public function get_font_path($font=''){
-        return $this->static_path().$font;
+    public function get_font_path($font_name=''){
+        $font_path = $this->static_path().'fonts'.Constants::DS;
+        if(null !=$font_name){
+            $result = $font_path.$font_name;
+        }else{
+            $result = $this->dir_files_list($font_path);
+        }
+        return $result;
     }
     /****
      * 获取字符串最长一行的长度

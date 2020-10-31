@@ -82,6 +82,7 @@ class ImageAddImage extends Client
 
         $save_path = $this->path.base64_encode($image.Constants::UND.$image_width."x".$image_height).Constants::DOT.$format;
         $imagick->writeImage($save_path);
+        $imagick->destroy();
         return Constants::DS.$save_path;
     }
 

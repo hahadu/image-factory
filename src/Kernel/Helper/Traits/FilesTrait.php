@@ -25,6 +25,9 @@ trait FilesTrait
     public function mkdir($dirname){
         return FilesHelper::mkdir($dirname);
     }
+    public function dir_files_list($dir, $pattern="*"){
+        return FilesHelper::dir_files_list($dir, $pattern);
+    }
     public function get_save_path($save_path=''){
         if(null!=$save_path){
             $this->save_path = $save_path;

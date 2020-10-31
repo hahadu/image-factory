@@ -58,6 +58,7 @@ class Thumb
         $image->thumbnailImage($width,$height);
         $thumb_file =$this->path.base64_encode($this->file_name.time().'_'.$img_h.'x'.$img_w).'.'.$format;
         $image->writeImage($thumb_file);
+        $image->destroy();
         return Constants::DS.$thumb_file;
     }
 

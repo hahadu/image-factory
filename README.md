@@ -21,7 +21,9 @@
 * 给图像添加文字水印
 * 从文本创建图像
 * 给图像添加图像水印
-项目使用过程有任何问题欢迎issues,或qq：582167246联系
+
+项目正在不断完善中，
+使用过程有任何问题和建议欢迎issues,或qq：582167246联系
 
 
 
@@ -74,8 +76,11 @@ use Hahadu\ImageFactory\Kernel\Factory;
         $icon_url = Factory::text_to_image()->text_to_icon('哈哈'); //截取：哈
         echo '<img src="'.$icon_url.'"/>';
 ```
-* 框架内置字体调用方法：
+* 框架内置字体调用路径：
 ```php
+//不传递$fontname返回数组，列出所有字体
+Factory::base()->get_font_path();
+//传递$fontname返回字体路径字符串
 Factory::base()->get_font_path($fontname='SourceHanSansCN-Light.otf');
 ```
 * 图像添加文字水印

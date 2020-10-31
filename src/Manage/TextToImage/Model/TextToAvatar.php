@@ -96,6 +96,7 @@ class TextToAvatar
             $image->setImageFormat($this->avatar_format);
 
             $image->writeImages($path,true);
+            $image->destroy();
             return Constants::DS.$path;
         }catch (\Exception $e){
             return $e;
