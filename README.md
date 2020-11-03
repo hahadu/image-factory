@@ -21,6 +21,7 @@
 * 给图像添加文字水印
 * 从文本创建图像
 * 给图像添加图像水印
+* 创建验证码
 
 项目正在不断完善中，
 使用过程有任何问题和建议欢迎issues,或qq：582167246联系
@@ -161,4 +162,14 @@ Factory::base()->get_font_path($fontname='SourceHanSansCN-Light.otf');
         $img_mark_url = Factory::image_to_image()->image_water_mark($image,$x='right',$y='down',$path=null,$option);
         return '<img src="'.$img_mark_url.'"/>';
 
+```
+
+* 创建验证码
+```php
+        $config = new Config();
+        Factory::setOptions($config);
+
+        $img_captcha_url = Factory::text_to_image()->captcha_creat();
+        echo $img_captcha_url;
+        die;
 ```

@@ -25,8 +25,6 @@ trait ImagickTrait
      * @return \Imagick
      */
     public function set_image(& $imagick,$style=[]){
-
-     //   $imagick ->thumbnailImage()
        return $imagick;
     }
 

@@ -26,5 +26,6 @@ class Constants extends Imagick
     const MUS = '-';
     const UND = '_';
     const DEFAULT_FONTS = 'SourceHanSansCN-Light.otf';
+    const CAPTCHA = 'captcha';
 
 }

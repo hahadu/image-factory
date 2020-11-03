@@ -20,6 +20,7 @@ use Hahadu\ImageFactory\Manage\TextToImage\Model\TextAddImage;
 use Hahadu\ImageFactory\Manage\TextToImage\Model\TextToAvatar;
 use Hahadu\ImageFactory\Manage\TextToImage\Model\TextToIcon;
 use Hahadu\ImageFactory\Manage\TextToImage\Model\TextCreateImage;
+use Hahadu\ImageFactory\Manage\TextToImage\Model\Captcha;
 
 
 class Client
@@ -28,12 +29,14 @@ class Client
     protected $TextToIcon;
     protected $TextAddImage;
     protected $TextCreateImage;
+    protected $Captcha;
 
     public function __construct($kernel){
         $this->TextToAvatar = new TextToAvatar($kernel);
         $this->TextToIcon = new TextToIcon($kernel);
         $this->TextAddImage = new TextAddImage($kernel);
         $this->TextCreateImage = new TextCreateImage($kernel);
+        $this->Captcha = new Captcha($kernel);
     }
     public function text_to_avatar($text){
         return $this->TextToAvatar->text_to_avatar($text);
@@ -56,6 +59,12 @@ class Client
     }
     public function text_create_image($text,$option=[]){
         return $this->TextCreateImage->text_create_image($text,$option);
+    }
+    public function captcha_creat(){
+        return $this->Captcha->create();
+    }
+    public function captcha_check($code){
+        return $this->Captcha->check($code);
     }
 
 }

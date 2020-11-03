@@ -23,12 +23,11 @@ use Hahadu\ImageFactory\Kernel\Models\Traits\ImagickTrait;
 class ImageAddImage extends Client
 {
     use ImagickTrait;
-    private $config;
     private $path;
     public function __construct($kernel)
     {
         parent::__construct($kernel);
-        $this->config = $this->_kernel->config;
+//        $this->config = $this->_kernel->config;
     }
     public function water_mark($image,$x='right',$y='down',$option=[]){
         $path = isset($option['path'])?$option['path']:null;

@@ -45,6 +45,10 @@ class BaseHelper
     private function static_path(){
         return dirname(dirname(dirname(__DIR__))).Constants::DS.'static/';
     }
+    public function get_verify_bg(){
+        $bg_path = $this->static_path().'verify_bgs'.Constants::DS;
+        return $this->dir_files_list($bg_path);
+    }
 
     public function get_font_path($font_name=''){
         $font_path = $this->static_path().'fonts'.Constants::DS;

@@ -24,6 +24,8 @@ use Hahadu\ImageFactory\Kernel\Models\ImagickModel;
 class BaseClient
 {
     protected $_kernel;
+    protected $config;
+    protected $base;
 
     /*****
      * BaseClient constructor.
@@ -31,6 +33,8 @@ class BaseClient
      */
     public function __construct($kernel){
         $this->_kernel = $kernel;
+        $this->config = $kernel->config;
+        $this->base = $kernel->base;
     }
     protected function imagickModel($imagick){
         return new ImagickModel($imagick);
