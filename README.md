@@ -167,9 +167,31 @@ Factory::base()->get_font_path($fontname='SourceHanSansCN-Light.otf');
 * 创建验证码
 ```php
         $config = new Config();
+        //验证码支持的设置，不设则使用默认值
+        $config->captcha_config=[
+            'expire'   => 1800, // 验证码过期时间（s）
+            'useZh'    => true, // 使用中文验证码
+            'fontSize' => 25, // 验证码字体大小(px)
+            'useCurve' => true, // 是否画混淆曲线
+            'useNoise' => true, // 是否添加杂点
+            'useImgBg' => false, //是否添加背景图片
+            'imageH'   => 0, // 验证码图片高度
+            'imageW'   => 0, // 验证码图片宽度
+            'length'   => 5, // 验证码长度
+            'font'     => '', // 验证码字体，不设置随机获取
+        ];
         Factory::setOptions($config);
-
         $img_captcha_url = Factory::text_to_image()->captcha_creat();
         echo $img_captcha_url;
         die;
+```
+* 检测验证码
+```php
+            /****
+             * 返码说明：(int)
+             * 1：成功
+             * 420105：验证码错误
+             * 420106：验证码过期
+             */
+       Factory::text_to_image()->captcha_check($_POST['code']);
 ```

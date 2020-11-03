@@ -52,5 +52,10 @@ class Config
      * @var string
      */
     public $fonts = '';
+    /****
+     * @var array 设置验证码
+     */
+    public $captcha_config=[
+    ];
 
 }
