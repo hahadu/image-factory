@@ -107,7 +107,7 @@ Factory::base()->get_font_path($fontname='SourceHanSansCN-Light.otf');
          * 如果$option['path'] 存在则覆盖$config->setSavePath
          * 区分大小写
          */
-        $text_water_mark = Factory::text_to_image()->TextAddImage->water_mark($image,$x='right',$y='down',$option=[]);
+        $text_water_mark = Factory::text_to_image()->text_water_mark($image,$x='right',$y='down',$option=[]);
         echo  '<img src="'.$text_water_mark.'"/>';
 
 ```
