@@ -25,8 +25,8 @@ class Client
     {
         $this->ImageAddImage = new ImageAddImage($kernel);
     }
-    public function image_water_mark($image,$x='right',$y='down',$path=null,$options=[]){
-        return $this->ImageAddImage->water_mark($image,$x,$y,$path,$options);
+    public function image_water_mark($image,$x='right',$y='down',$options=[]){
+        return $this->ImageAddImage->water_mark($image,$x,$y,$options);
 
     }
 

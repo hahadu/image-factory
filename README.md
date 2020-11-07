@@ -148,7 +148,7 @@ Factory::base()->get_font_path($fontname='SourceHanSansCN-Light.otf');
 
         $config = new Config();
         $config->setSavePath = 'images/';
-        $config->waterMarkImage='dd.png';
+        $config->waterMarkImage='logo.png'; //水印logo的路径
         Factory::setOptions($config);
 
         $option=[
