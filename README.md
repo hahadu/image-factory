@@ -157,7 +157,7 @@ Factory::base()->get_font_path($fontname='SourceHanSansCN-Light.otf');
             'path' => '' //自定义文件保存路径，此处会覆盖$config->setSavePath
         ];
 
-        $img_mark_url = Factory::image_to_image()->image_water_mark($image,$x='right',$y='down',$path=null,$option);
+        $img_mark_url = Factory::image_to_image()->image_water_mark($image,$x='right',$y='down',$option);
         return '<img src="'.$img_mark_url.'"/>';
 
 ```
