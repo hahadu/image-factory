@@ -68,6 +68,9 @@ class TextAddImage
             $WaterMark = $this->config->getWaterMarkText();
         }
         $style = $this->style;
+        $style['stroke_width'] = 0.01;
+        $style['stroke_opacity'] = 0.1;
+        $style['stroke_color'] = "#00000001";
 
         //字符串长度 + 字符宽度 + 空格
         $line = mb_substr_count($WaterMark,PHP_EOL)+1;

@@ -96,6 +96,7 @@ Factory::base()->get_font_path($fontname='SourceHanSansCN-Light.otf');
             'fill_color' => '#ffffffff',//字体颜色，支持标准色值，
             'under_color' => '#ffffffff',//背景颜色，支持标准色值
             'fill_opacity' => '0.5', //浮点数0-1，透明度，这里设置透明度会覆盖fill_color中的透明度
+            'stroke_width' =>0.1, //描边
         ];
         Factory::setOptions($config);
         /*

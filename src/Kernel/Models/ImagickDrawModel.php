@@ -37,6 +37,14 @@ class ImagickDrawModel extends \ImagickDraw
         if (isset ( $set['fill_color'] ))
 
             $this->setFillColor( $set['fill_color'] );
+        if(isset($set['stroke_width']))
+            $this->setStrokeWidth($set['stroke_width']);
+        if(isset($set['stroke_alpha']))
+            $this->setStrokeAlpha($set['stroke_alpha']);
+        if(isset($set['stroke_color']))
+            $this->setStrokeColor($set['stroke_color']);
+        if(isset($set['stroke_opacity']))
+            $this->setStrokeOpacity($set['stroke_opacity']);
 
         if (isset ( $set['under_color'] ))
 
