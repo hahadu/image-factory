@@ -26,7 +26,7 @@ class TextToIcon
     protected $background = 'white';
     protected $image_files = null;
     protected $icon_size = 50;
-    protected $icon_format = 'icon';
+    protected $icon_format = 'ico';
     /****
      * @var Kernel
      */

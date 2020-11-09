@@ -71,7 +71,7 @@ use Hahadu\ImageFactory\Kernel\Factory;
         //生成.png格式头像
         $avatar_url = Factory::text_to_image()->text_to_icon('HahaDu'); //截取：Ha
         echo '<img src="'.$avatar_url.'"/>';
-        //生成.icon格式图标
+        //生成.ico格式图标
         $icon_url = Factory::text_to_image()->text_to_icon('哈哈'); //截取：哈
         echo '<img src="'.$icon_url.'"/>';
 ```
