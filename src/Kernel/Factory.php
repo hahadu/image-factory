@@ -25,49 +25,56 @@ use Hahadu\ImageFactory\Kernel\Helper\BaseHelper;
 
 class Factory
 {
-    private static $ImageToText;
+    private $ImageToText;
     protected $kernel;
-    private static $Base;
-    private static $instance;
-    private static $Scale;
-    private static $TextToImage;
-    private static $ImageToImage;
-    private static $config;
+    private $Base;
+    private $instance;
+    private $Scale;
+    private $TextToImage;
+    private $ImageToImage;
+    private $config;
 
     //构造方法
     public function __construct($config){
+        $this->config = $config;
         $this->kernel = new Kernel($config);
-        self::$Base = new BaseHelper($config);
-        self::$ImageToText = new ImageToText($this->kernel);
-        self::$TextToImage = new TextToImage($this->kernel);
-        self::$Scale = new Scale($this->kernel);
-        self::$ImageToImage = new ImageToImage($this->kernel);
+        $this->Base = new BaseHelper($config);
+        $this->ImageToText = new ImageToText($this->kernel);
+        $this->TextToImage = new TextToImage($this->kernel);
+        $this->Scale = new Scale($this->kernel);
+        $this->ImageToImage = new ImageToImage($this->kernel);
 
     }
     //参数设置
     static public function setOptions($config){
         $config = new ImagickConfig($config);
-        if (!(self::$instance instanceof self)) {
-            self::$instance = new self($config);
-        }
-        return self::$instance;
+        return new self($config);
     }
-    static public function base(){
-        return self::$Base;
+    public function base(){
+        return $this->Base;
     }
-    static public function scale(){
-        return self::$Scale;
+    public function scale(){
+        return $this->Scale;
     }
 
-    static public function image_to_text(){
-        return self::$ImageToText;
+    public function image_to_text(){
+        return $this->ImageToText;
     }
-    static public function text_to_image(){
-        return self::$TextToImage;
+    public function text_to_image(){
+        return $this->TextToImage;
     }
-    static public function image_to_image(){
-        return self::$ImageToImage;
+    public function image_to_image(){
+        return $this->ImageToImage;
     }
 
+    public static function __callStatic($name, $arguments)
+    {
+        return self::setOptions($arguments)->{$name}();
+    }
+
+//    public function __call($name, $arguments)
+//    {
+//
+//    }
 
 }

@@ -40,9 +40,10 @@ class Thumb
      * @param string $path 文件保存目录
      * @param int $width 压缩图片宽
      * @param int $height 压缩图片高
+     * @param string $encode 编码方式 base64_encode md5 ....
      * @return string
      */
-    public function image_thumb($file_name,$path='',$width=100,$height=100){
+    public function image_thumb($file_name,$path='',$width=100,$height=100,$encode='base64_encode'){
         $this->file_name = $file_name;
         $this->imagick = $this->_kernel->Imagick($this->file_name);
 
@@ -56,7 +57,8 @@ class Thumb
         $img_w = $image->getImageWidth();
 
         $image->thumbnailImage($width,$height);
-        $thumb_file =$this->path.base64_encode($this->file_name.time().'_'.$img_h.'x'.$img_w).'.'.$format;
+        $name = $encode($this->file_name.time().'_'.$img_h.'x'.$img_w);
+        $thumb_file =$this->path.$name.'.'.$format;
         $image->writeImage($thumb_file);
         $image->destroy();
         return Constants::DS.$thumb_file;

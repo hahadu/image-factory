@@ -6,7 +6,7 @@
 项目依赖php-imagick扩展，
 
 安装前请确保安装了php-imagick
-- debian/ubuntu sudo apt install php-imagick
+- debian/ubuntu: sudo apt install php-imagick
 
 安装项目：
 - composer require hahadu/image-factory
