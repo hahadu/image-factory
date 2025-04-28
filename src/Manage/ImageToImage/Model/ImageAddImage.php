@@ -78,8 +78,9 @@ class ImageAddImage extends Client
         $imagick->compositeImage($img_water,Constants::COMPOSITE_ATOP,$water_x,$water_y);
 
         $imagick->setImageFormat($format);
-
-        $save_path = $this->path.base64_encode($image.Constants::UND.$image_width."x".$image_height).Constants::DOT.$format;
+        $path_encode = $this->_kernel->config->getPathEncode();
+        $name = $path_encode($image.Constants::UND.$image_width."x".$image_height);
+        $save_path = $this->path.$name.Constants::DOT.$format;
         $imagick->writeImage($save_path);
         $imagick->destroy();
         return Constants::DS.$save_path;
