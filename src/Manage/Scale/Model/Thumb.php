@@ -34,21 +34,20 @@ class Thumb
         $this->path =$this->_kernel->config->getSavePath();
         $this->imagick = $this->_kernel->Imagick($this->file_name);
     }
-    /****
+
+    /**
      * 创建缩略图
      * @param string $file_name 要压缩的文件名
      * @param string $path 文件保存目录
      * @param int $width 压缩图片宽
      * @param int $height 压缩图片高
-     * @param string $encode 编码方式 base64_encode md5 ....
+     * @param string $path_encode 编码方式 base64_encode md5 ....
      * @return string
+     * @throws \ImagickException
      */
-    public function image_thumb($file_name,$path='',$width=100,$height=100,$encode='base64_encode'){
+    public function image_thumb($file_name,$path='',$width=100,$height=100,$path_encode=null){
         $this->file_name = $file_name;
         $this->imagick = $this->_kernel->Imagick($this->file_name);
-
-        $width  = $width ?? 100;
-        $height = $height ?? 100;
         $this->path = $this->_kernel->base->get_save_path($path);
 
         $image  = $this->imagick;
@@ -57,11 +56,12 @@ class Thumb
         $img_w = $image->getImageWidth();
 
         $image->thumbnailImage($width,$height);
-        $name = $encode($this->file_name.time().'_'.$img_h.'x'.$img_w);
+        if(!$path_encode) $path_encode = $this->_kernel->config->getPathEncode();
+        $name = $path_encode($this->file_name.time().'_'.$img_h.'x'.$img_w);
         $thumb_file =$this->path.$name.'.'.$format;
         $image->writeImage($thumb_file);
         $image->destroy();
-        return Constants::DS.$thumb_file;
+        return DIRECTORY_SEPARATOR.$thumb_file;
     }
 
 

@@ -36,8 +36,8 @@ class Client
      * @param int $height 压缩图片高
      * @return string
      */
-    public function thumb($file_name,$path='',$width=100,$height=100){
-        return $this->Thumb->image_thumb($file_name,$path,$width,$height);
+    public function thumb($file_name,$path='',$width=100,$height=100,$path_encode=null){
+        return $this->Thumb->image_thumb($file_name,$path,$width,$height,$path_encode);
     }
 
 }

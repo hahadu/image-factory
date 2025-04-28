@@ -58,4 +58,11 @@ class Config
     public $captcha_config=[
     ];
 
+    public $path_encode = 'base64_encode';
+
+    public function __call($name, $arguments)
+    {
+        $this->{$name} = $arguments[0];
+        return $this;
+    }
 }

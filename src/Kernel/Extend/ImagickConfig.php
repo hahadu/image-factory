@@ -23,15 +23,15 @@ use Hahadu\ImageFactory\Config\Config;
 class ImagickConfig
 {
     private $config;
-    /****
+    /**
      * ImagickConfig constructor.
-     * @param Config $config
+     * @param Config|object $config
      */
-    public function __construct($config){
-        return $this->config = $config;
+    public function __construct(object $config){
+        $this->config = $config;
     }
     private function static_path(){
-        return dirname(dirname(dirname(__DIR__))).Constants::DS.'static/';
+        return dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR.'static/';
     }
     /****
      * @return string 默认文件保存路径
@@ -82,11 +82,7 @@ class ImagickConfig
 
     }
     public function getFonts(){
-        $fonts = $this->config->fonts;
-        if(null == $fonts){
-            $fonts = $this->static_path().'fonts'.Constants::DS.Constants::DEFAULT_FONTS;
-        }
-        return $fonts;
+        return $this->config->fonts ?? $this->static_path().'fonts'.Constants::DS.Constants::DEFAULT_FONTS;
     }
     public function getCaptchaConfig(){
         $captcha_config = [
@@ -104,6 +100,11 @@ class ImagickConfig
         $set_captcha_config = $this->config->captcha_config;
         $captcha_config = array_replace_recursive($captcha_config,$set_captcha_config);
         return $captcha_config;
+    }
+
+    public function getPathEncode()
+    {
+        return $this->config->path_encode;
     }
 
 }
