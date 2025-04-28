@@ -35,7 +35,7 @@ class Factory
     private $config;
 
     //构造方法
-    public function __construct($config){
+    public function __construct(object $config){
         $this->config = $config;
         $this->kernel = new Kernel($config);
         $this->Base = new BaseHelper($config);
@@ -67,11 +67,22 @@ class Factory
         return $this->ImageToImage;
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function __callStatic($name, $arguments)
     {
-        return self::setOptions($arguments)->{$name}();
-    }
+        $config = $arguments[0];
+        if(is_object($config)){
+            $instance = self::setOptions($arguments[0]);
+            if (method_exists($instance, $name)) {
+                return $instance->{$name}();
+            }
+            throw new \Exception("Method {$name} does not exist in " . __CLASS__);
+        }
+        throw new \Exception("{$arguments[0]} type error " . __CLASS__);
 
+    }
 //    public function __call($name, $arguments)
 //    {
 //
