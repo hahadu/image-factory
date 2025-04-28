@@ -106,7 +106,9 @@ class TextAddImage
         }
 
         $this->AddText->add_text($image_data,$WaterMark,$text_x,$text_y,0,$style);
-        $file = $this->path.(base64_encode('time'.$image.$WaterMark)).Constants::DOT.mb_strtolower($image_data->getImageFormat());
+        $path_encode = $this->_kernel->config->getPathEncode();
+        $name = $path_encode('time'.$image.$WaterMark);
+        $file = $this->path.$name.Constants::DOT.mb_strtolower($image_data->getImageFormat());
 
         $image_data->writeImage($file);
         $image_data->destroy();

@@ -60,6 +60,12 @@ class Config
 
     public $path_encode = 'base64_encode';
 
+    public function set($key,$value)
+    {
+        $this->{$key} = $value;
+        return $this;
+    }
+
     public function __call($name, $arguments)
     {
         $this->{$name} = $arguments[0];

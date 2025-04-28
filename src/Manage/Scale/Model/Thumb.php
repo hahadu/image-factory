@@ -45,7 +45,7 @@ class Thumb
      * @return string
      * @throws \ImagickException
      */
-    public function image_thumb($file_name,$path='',$width=100,$height=100,$path_encode=null){
+    public function image_thumb($file_name,$path='',$width=100,$height=100){
         $this->file_name = $file_name;
         $this->imagick = $this->_kernel->Imagick($this->file_name);
         $this->path = $this->_kernel->base->get_save_path($path);
@@ -56,7 +56,7 @@ class Thumb
         $img_w = $image->getImageWidth();
 
         $image->thumbnailImage($width,$height);
-        if(!$path_encode) $path_encode = $this->_kernel->config->getPathEncode();
+        $path_encode = $this->_kernel->config->getPathEncode();
         $name = $path_encode($this->file_name.time().'_'.$img_h.'x'.$img_w);
         $thumb_file =$this->path.$name.'.'.$format;
         $image->writeImage($thumb_file);
